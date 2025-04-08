@@ -1,0 +1,17 @@
+{
+	"name": "base-ev1-lenguaje-de-programacion-web",
+	"version": "0.1.0",
+	"description": "Base para el trabajo de la Ev1 Lenguaje de Programación WEB",
+	"license": "MIT",
+	"author": "Gustavo Alfredo Marín Sáez",
+	"type": "module",
+	"main": "index.js",
+	"scripts": {
+		"start": "node index.js",
+		"dev": "node --watch index.js",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"dependencies": {
+		"express": "^5.1.0"
+	}
+}

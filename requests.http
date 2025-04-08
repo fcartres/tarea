@@ -1,0 +1,65 @@
+# Para poder utilizar las peticiones que están aquí debe instalar la extensión 
+# REST Client. Al abrir el proyecto con Visual Studio Code debería aparecerle un
+# mensaje para poder instalarlo. 
+# Para utilizar la petición con la extensión instalada, puedes utilizar los botones
+# "Send Request"
+# Este archivo hace uso de variables. Para saber como funcionan vea la 
+# documentación de REST Client.
+# Si está montando el proyecto en la nube, recuerde cambiar la url base a continuación
+
+@base = http://localhost:3000
+
+###
+
+# Debe decir "Hello World!" con Content-Type text/plain
+GET {{base}}/api HTTP/1.1
+
+###
+
+# @name login
+@authToken = {{login.response.body.token}}
+# Para loguearse con usuario y contraseña
+POST {{base}}/api/auth/login HTTP/1.1
+Content-Type: application/json
+
+{
+	"username": "admin",
+	"password": "certamen123"
+}
+
+###
+
+# Debe poder ver To Dos (Inicialmente vacío). Recordar enviar el token entregado en 
+# el login con la cabecera X-Authorization
+GET {{base}}/api/todos HTTP/1.1
+X-Authorization: {{authToken}}
+
+###
+
+# @name crearToDo
+@toDoId = {{crearToDo.response.body.id}}
+# Debe poder insertar un To Do
+POST {{base}}/api/todos HTTP/1.1
+Content-Type: application/json
+X-Authorization: {{authToken}}
+
+{
+	"title": "Una tarea por hacer"
+}
+
+###
+
+# Debe poder actualizar parcialmente una tarea (Recordar usar un id que ya exista)
+PATCH {{base}}/api/todos/{{toDoId}} HTTP/1.1
+Content-Type: application/json
+X-Authorization: {{authToken}}
+
+{
+	"title": "Una tarea actualizada"
+}
+
+###
+
+# Debe poder borrar una tarea
+DELETE {{base}}/api/todos/{{toDoId}} HTTP/1.1
+X-Authorization: {{authToken}}
